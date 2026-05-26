@@ -1,0 +1,11 @@
+package com.project.paysafecard.core.repository;
+
+import com.project.paysafecard.core.model.entity.GeneratedPaysafe;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+public interface GeneratedPaysafeRepository extends JpaRepository<GeneratedPaysafe, UUID> {
+}
