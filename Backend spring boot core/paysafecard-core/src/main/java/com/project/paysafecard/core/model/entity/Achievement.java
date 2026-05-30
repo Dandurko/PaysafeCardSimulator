@@ -1,6 +1,10 @@
 package com.project.paysafecard.core.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.List;
@@ -18,6 +22,7 @@ public class Achievement {
     private int id;
 
     @Column(nullable = false,unique = true,length = 45)
+    @NotNull
     private String name;
 
     @Column(nullable = true)

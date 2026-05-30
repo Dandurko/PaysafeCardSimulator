@@ -1,7 +1,8 @@
 package com.project.paysafecard.core.model.entity;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class AuditLogType {
     private int id;
 
     @Column(nullable = false,unique = true,length = 45)
-    @Nonnull
+    @NotNull
     private String type;
 
     @Column

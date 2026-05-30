@@ -2,6 +2,7 @@ package com.project.paysafecard.core.model.entity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class UserRole {
     private int id;
 
     @Column(unique = true,nullable = false,length = 45)
-    @Nonnull
+    @NotNull
     private String name;
 
     @OneToMany(mappedBy = "role")

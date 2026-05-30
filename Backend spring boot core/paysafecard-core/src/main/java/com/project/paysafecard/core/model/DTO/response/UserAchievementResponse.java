@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -23,8 +24,10 @@ public class UserAchievementResponse {
 
     private int achievedAchievementsQuantity;
 
+    @NotNull
     private List<Achievement> achievedAchievements;
 
+    @NotNull
     private LocalDateTime createdDate;
 
     private boolean allAchieved;

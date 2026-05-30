@@ -1,6 +1,7 @@
 package com.project.paysafecard.core.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,9 +19,11 @@ import java.util.List;
 public class GeneratedPaysafe extends BaseEntity{
 
     @Column(name = "paysafe_number_hash" , unique = true)
+    @NotNull
     private String paysafeNumberHash;
 
     @Column(name = "valid_till",nullable = false)
+    @NotNull
     private LocalDateTime validTill;
 
     @Column(precision = 10 , scale = 2,nullable = false)
