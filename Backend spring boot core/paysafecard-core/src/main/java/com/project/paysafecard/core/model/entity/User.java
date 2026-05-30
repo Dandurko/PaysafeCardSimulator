@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -39,6 +40,9 @@ public class User extends BaseEntity{
     @Column(nullable = false,precision = 10,scale = 2)
     private BigDecimal balance;
 
+    @Column(name="date_of_birth",nullable = false)
+    private LocalDate dateOfBirth;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id",referencedColumnName = "id")
     private UserRole role;
@@ -57,5 +61,6 @@ public class User extends BaseEntity{
 
     @OneToMany(mappedBy = "user")
     private List<Transaction> transactions;
+
 
 }
