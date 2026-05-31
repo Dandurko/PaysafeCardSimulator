@@ -1,4 +1,4 @@
-package com.project.paysafecard.core.service.jpaService;
+package com.project.paysafecard.core.service.jpa;
 
 import com.project.paysafecard.core.model.entity.GeneratedPaysafe;
 import org.springframework.stereotype.Service;
