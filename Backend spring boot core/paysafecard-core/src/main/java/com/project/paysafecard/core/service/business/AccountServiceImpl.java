@@ -1,11 +1,13 @@
 package com.project.paysafecard.core.service.business;
 
+import com.project.paysafecard.core.mapper.UserMapper;
 import com.project.paysafecard.core.model.DTO.request.UserLoginRequest;
 import com.project.paysafecard.core.model.DTO.request.UserRegisterRequest;
 import com.project.paysafecard.core.model.DTO.response.UserResponse;
 import com.project.paysafecard.core.model.entity.User;
 import com.project.paysafecard.core.service.jpa.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -26,11 +28,10 @@ public class AccountServiceImpl implements AccountService {
         if (optionalUser.isPresent()) {
             // check password
             User user = optionalUser.get();
-            return new UserResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getBalance(), user.getDateOfBirth());
+            return UserMapper.toResponse(user);
         }
 
-        //throw an exception that user had wrong credemtials
-        return null;
+        throw new UsernameNotFoundException("Usernam" + userLoginRequest.email() + "e does not exists");
     }
 
     //TODO:LOGGERS
@@ -39,20 +40,14 @@ public class AccountServiceImpl implements AccountService {
         Optional<User> optionalUser = userService.findUserByEmail(userRegisterRequest.email());
 
         if (optionalUser.isPresent()) {
-            //throw an excpetion that user exists
+            //throw an exception that user laready exists
         }
 
-        User user = new User();
+        User user = UserMapper.fromUserRegisterToUser(userRegisterRequest);
 
-        user.setFirstName(userRegisterRequest.firstName());
-        user.setLastName(userRegisterRequest.lastName());
-        user.setEmail(userRegisterRequest.email());
-        user.setDateOfBirth(userRegisterRequest.dateOfBirth());
-        //need to encrypt
-        user.setPasswordHash(userRegisterRequest.password());
-
+        // nastavit password hash
         userService.save(user);
 
-        return new UserResponse(user.getFirstName(), user.getLastName(), user.getEmail(), user.getBalance(), user.getDateOfBirth());
+        return UserMapper.toResponse(user);
     }
 }
