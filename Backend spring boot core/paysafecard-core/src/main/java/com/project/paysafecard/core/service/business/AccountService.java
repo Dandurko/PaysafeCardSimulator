@@ -8,6 +8,5 @@ import com.project.paysafecard.core.model.entity.User;
 import java.util.Optional;
 
 public interface AccountService {
-    UserResponse login(UserLoginRequest userLoginRequest);
     UserResponse register(UserRegisterRequest userRegisterRequest);
 }

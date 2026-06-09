@@ -6,8 +6,10 @@ import com.project.paysafecard.core.model.DTO.request.UserRegisterRequest;
 import com.project.paysafecard.core.model.DTO.response.UserResponse;
 import com.project.paysafecard.core.model.entity.User;
 import com.project.paysafecard.core.service.jpa.UserService;
+import jakarta.persistence.EntityExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -19,33 +21,20 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     UserService userService;
 
-    //TODO:LOGGERS
-    @Override
-    public UserResponse login(UserLoginRequest userLoginRequest) {
+    @Autowired
+    PasswordEncoder passwordEncode;
 
-        Optional<User> optionalUser = userService.findUserByEmail(userLoginRequest.email());
-
-        if (optionalUser.isPresent()) {
-            // check password
-            User user = optionalUser.get();
-            return UserMapper.toResponse(user);
-        }
-
-        throw new UsernameNotFoundException("Usernam" + userLoginRequest.email() + "e does not exists");
-    }
-
-    //TODO:LOGGERS
     @Override
     public UserResponse register(UserRegisterRequest userRegisterRequest) {
         Optional<User> optionalUser = userService.findUserByEmail(userRegisterRequest.email());
 
         if (optionalUser.isPresent()) {
-            //throw an exception that user laready exists
+            throw new EntityExistsException();
         }
 
         User user = UserMapper.fromUserRegisterToUser(userRegisterRequest);
 
-        // nastavit password hash
+        user.setPasswordHash(passwordEncode.encode(userRegisterRequest.password()));
         userService.save(user);
 
         return UserMapper.toResponse(user);
