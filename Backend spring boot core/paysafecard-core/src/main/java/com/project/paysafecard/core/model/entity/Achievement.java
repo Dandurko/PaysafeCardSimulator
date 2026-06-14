@@ -1,5 +1,6 @@
 package com.project.paysafecard.core.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -28,6 +29,7 @@ public class Achievement {
     @Column(nullable = true)
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "achievement",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<UserAchievement> users;
 

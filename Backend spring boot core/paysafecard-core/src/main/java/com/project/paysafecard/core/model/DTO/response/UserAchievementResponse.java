@@ -1,6 +1,7 @@
 package com.project.paysafecard.core.model.DTO.response;
 
 import com.project.paysafecard.core.model.entity.Achievement;
+import com.project.paysafecard.core.model.entity.UserAchievement;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToOne;
@@ -26,9 +27,6 @@ public class UserAchievementResponse {
 
     @NotNull
     private List<Achievement> achievedAchievements;
-
-    @NotNull
-    private LocalDateTime createdDate;
 
     private boolean allAchieved;
 }

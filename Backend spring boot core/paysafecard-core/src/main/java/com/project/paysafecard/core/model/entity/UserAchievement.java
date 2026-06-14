@@ -12,12 +12,16 @@ public class UserAchievement {
     @EmbeddedId
     private UserAchievementId id;
 
-    @ManyToOne(fetch =  FetchType.LAZY)
+    //check if we need JoinColumn
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userId")
+    @JoinColumn(name = "user_uuid")
     private User user;
 
-    @ManyToOne(fetch =  FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("achievementId")
+    @JoinColumn(name = "achievement_id")
     private Achievement achievement;
 
     @Column(name = "created_at",nullable = false)
