@@ -28,7 +28,7 @@ public class GeneratedPaysafe extends BaseEntity{
 
     @Column(precision = 10 , scale = 2,nullable = false)
     @ColumnDefault("0")
-    private BigDecimal amount;
+    private BigDecimal amount = BigDecimal.ZERO;
 
     @Column(name = "is_redeemed",nullable = false)
     @ColumnDefault("false")

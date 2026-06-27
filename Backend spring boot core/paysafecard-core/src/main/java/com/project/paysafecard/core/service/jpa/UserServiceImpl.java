@@ -20,6 +20,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findUserByEmail(String email) {
-        return Optional.of(userRepository.findUserByEmail(email));
+        return Optional.ofNullable(userRepository.findUserByEmail(email));
     }
 }

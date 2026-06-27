@@ -19,7 +19,7 @@ public class Transaction extends BaseEntity{
 
     @Column(precision = 10  , scale = 2,nullable = false)
     @ColumnDefault("0")
-    private BigDecimal amount;
+    private BigDecimal amount = BigDecimal.ZERO;
 
     @ManyToOne
     @JoinColumn(name = "user_uuid",referencedColumnName = "uuid")
